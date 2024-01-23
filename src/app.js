@@ -23,4 +23,12 @@ io.on('connection', socket => {
         messages.push(data)
         io.emit('messageLogs', messages)
     })
+
+    socket.on('login', data => {
+        socket.emit('messageLogs', messages)
+        console.log(data)
+        socket.broadcast.emit('register', data)
+    })
+
+
 })

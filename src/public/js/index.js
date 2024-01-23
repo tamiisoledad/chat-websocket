@@ -11,6 +11,8 @@ Swal.fire({
     allowOutsideClick: false
 }).then(result => {
     user= result.value
+    console.log(user)
+    socket.emit('login', user)
 })
 
 chatBox.addEventListener('keyup', evento => {
@@ -29,4 +31,14 @@ socket.on('messageLogs', data => {
         messages = messages + `${message.user} dice: ${message.message} <br>`
     })
     log.innerHTML = messages;
+})
+
+socket.on('register', data => {
+    console.log(data)
+    Swal.fire({
+        title: 'Se registro un nuevo usuario',
+        text: `El nombre del usuario es ${data}`,
+        icon: 'success',
+        toast: true
+    })
 })
